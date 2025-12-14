@@ -3,8 +3,8 @@ import math
 
 WIDTH, HEIGHT = 900, 600
 rayNum = 360
-maxRayL = 800
-initPower = 100.0
+maxRayL = 500
+initPower = 80
 minPower = 1.0 
 wallPwrLoss = 0.7
 
@@ -30,7 +30,7 @@ def line_intersection(p1, p2, p3, p4):
 
     den = (x1 - x2)*(y3 - y4) - (y1 - y2)*(x3 - x4)
     if den == 0:
-        return None  # parallel lines
+        return None
 
     t = ((x1 - x3)*(y3 - y4) - (y1 - y3)*(x3 - x4)) / den
     u = ((x1 - x3)*(y1 - y2) - (y1 - y3)*(x1 - x2)) / den
@@ -108,22 +108,36 @@ def drawRays(angle_deg):
         )
 
 running = True
+
+ultra = False
+
 while running:
     clock.tick(60)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_f:
+                if ultra == False:
+                    ultra = True
+                    wallPwrLoss = 0.4
+                    maxRayL = 250
+                    initPower = 130
+                else:
+                    ultra = False
+                    wallPwrLoss = 0.7
+                    maxRayL = 500
+                    initPower = 60
 
     if pygame.mouse.get_pressed()[0]:
         tx_pos = list(pygame.mouse.get_pos())
+    
 
     screen.fill((20, 20, 20))
 
     for w in walls:
         pygame.draw.line(screen, (200, 200, 200), w[0], w[1], 3)
-
-    
 
     for angle_deg in range(0, 360, 4):
        drawRays(angle_deg) 
