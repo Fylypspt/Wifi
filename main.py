@@ -3,7 +3,7 @@ import math
 
 WIDTH, HEIGHT = 900, 600
 rayNum = 360
-maxRayL = 500
+maxRayL = 400
 initPower = 80
 minPower = 1.0 
 wallPwrLoss = 0.7
@@ -22,7 +22,6 @@ walls = [
 ]
 
 def line_intersection(p1, p2, p3, p4):
-
     x1, y1 = p1
     x2, y2 = p2
     x3, y3 = p3
@@ -127,7 +126,7 @@ while running:
                 else:
                     ultra = False
                     wallPwrLoss = 0.7
-                    maxRayL = 500
+                    maxRayL = 400
                     initPower = 60
 
     if pygame.mouse.get_pressed()[0]:
